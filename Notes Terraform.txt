@@ -1,0 +1,95 @@
+===========Initial Setup==================
+install vscode
+install azure cli, aws cli with installer msi => path variable automatically get updated 
+download terraform.exe and keep that in location x (eg:c:\terraform)=> then udpate path variable to include that location
+
+
+
+===========then go to folders you will work from and confirm can see the terraform and az cli===================
+get-command terraform
+get-command az
+get-command aws
+
+
+====================Login/Check logged in account/azure================
+az login --use-device-code
+browse https://microsoft.com/devicelogin and INPUT CODE GOT ABOVE
+az account show
+az account list -o table
+
+===============Login/Check logged in account/aws================
+aws configure
+get accesskey and secret from aws console- apply it in above cli
+verify using - > aws sts get-caller-identity
+[netskope ssl decrypt breaks the aws connction as it checks a certificate store that is local to aws cli - uploading netskope ca there didnt test yet, instead just disabled swg]
+
+======git username and password for ALL REPOS = GLOBAL KEYWORD BELOW ======
+git config --global user.name "spp9183"
+git config --global user.email "spp9183@gmail.com"
+
+OR
+
+git config --global user.name "sameehpad"
+git config --global user.email "ppsameeh@gmail.com"
+
+
+============CHECK ===========
+git config -- user.name
+git config -- user.email
+
+========To check which remote a repo is connected ==============
+git remote -v
+
+============ git commands  =========
+
+====== git initiation , stage, commit ========
+
+git init
+git add .
+git commit -m "first commit"
+
+
+======= git branch name ======
+git branch -M main
+
+==== git remote define  =========
+git remote add origin https://github.com/sameehpad/spad3.git
+
+======= git push ===========
+git push -u origin main
+
+
+======== if git remote needs to be removed for changing  =============
+git remote remove origin
+git branch -M main
+git remote add origin https://github.com/spp9183/spp3.git
+git push -u origin main
+
+======  GTOCHAS =====
+logout vsc from git - UI - user icon - GitHub - logout
+that stops git path appearing in vsc automatically - so remote definition is must
+clear git hub accounts windows credential manager enty - that meddles with git push
+logout from git hub web - and authenticate when asked
+before pushing new repos using command line, create the repo manually in github
+
+================================================================================
+HOW TO BRING A MANUALLY CREATED CONFIG INTO TERRAFORM MANAGED STATE ==============
+
+1) CREATE Terraform configuration manually with  with required Resources and Arguments 
+2) Use Import function as below, to create statefile for those resources (sample for RG/Vnet/Subnet resources)
+terraform import azurerm_resource_group.rg1 /subscriptions/$(az account show --query id -o tsv)/resourceGroups/RG1
+terraform import azurerm_virtual_network.vnet1 /subscriptions/$(az account show --query id -o tsv)/resourceGroups/RG1/providers/Microsoft.Network/virtualNetworks/Vnet1
+terraform import azurerm_subnet.subnet1 /subscriptions/$(az account show --query id -o tsv)/resourceGroups/RG1/providers/Microsoft.Network/virtualNetworks/Vnet1/subnets/Subnet1
+terraform import azurerm_subnet.subnet2 /subscriptions/$(az account show --query id -o tsv)/resourceGroups/RG1/providers/Microsoft.Network/virtualNetworks/Vnet1/subnets/Subnet2
+terraform import azurerm_subnet.routeserversubnet /subscriptions/$(az account show --query id -o tsv)/resourceGroups/RG1/providers/Microsoft.Network/virtualNetworks/Vnet1/subnets/RouteServerSubnet
+3) Run terraform plan - response should be no change
+
+
+Netskope SWG broke aws configure command - either disable swg or need to add netskope CA cert to AWS trusted store
+
+
+
+
+
+
+
