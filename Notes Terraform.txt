@@ -53,7 +53,7 @@ git commit -m "first commit"
 git branch -M main
 
 ==== git remote define  =========
-git remote add origin https://github.com/sameehpad/spad3.git
+git remote add origin https://github.com/spp9183/9999 DOCS.git
 
 ======= git push ===========
 git push -u origin main
