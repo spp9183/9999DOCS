@@ -46,14 +46,14 @@ git remote -v
 
 git init
 git add .
-git commit -m "first commit"
+git commit -m "done"
 
 
 ======= git branch name ======
 git branch -M main
 
 ==== git remote define  =========
-git remote add origin https://github.com/spp9183/9999 DOCS.git
+git remote add origin https://github.com/spp9183/aws_tf2.git
 
 ======= git push ===========
 git push -u origin main
