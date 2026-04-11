@@ -65,27 +65,28 @@ git branch -M main
 git remote add origin https://github.com/spp9183/spp3.git
 git push -u origin main
 
-======  GTOCHAS =====
+===================  GOTCHAS =============================
 logout vsc from git - UI - user icon - GitHub - logout
 that stops git path appearing in vsc automatically - so remote definition is must
 clear git hub accounts windows credential manager enty - that meddles with git push
 logout from git hub web - and authenticate when asked
 before pushing new repos using command line, create the repo manually in github
 
-================================================================================
-HOW TO BRING A MANUALLY CREATED CONFIG INTO TERRAFORM MANAGED STATE ==============
-
-1) CREATE Terraform configuration manually with  with required Resources and Arguments 
-2) Use Import function as below, to create statefile for those resources (sample for RG/Vnet/Subnet resources)
-terraform import azurerm_resource_group.rg1 /subscriptions/$(az account show --query id -o tsv)/resourceGroups/RG1
-terraform import azurerm_virtual_network.vnet1 /subscriptions/$(az account show --query id -o tsv)/resourceGroups/RG1/providers/Microsoft.Network/virtualNetworks/Vnet1
-terraform import azurerm_subnet.subnet1 /subscriptions/$(az account show --query id -o tsv)/resourceGroups/RG1/providers/Microsoft.Network/virtualNetworks/Vnet1/subnets/Subnet1
-terraform import azurerm_subnet.subnet2 /subscriptions/$(az account show --query id -o tsv)/resourceGroups/RG1/providers/Microsoft.Network/virtualNetworks/Vnet1/subnets/Subnet2
-terraform import azurerm_subnet.routeserversubnet /subscriptions/$(az account show --query id -o tsv)/resourceGroups/RG1/providers/Microsoft.Network/virtualNetworks/Vnet1/subnets/RouteServerSubnet
-3) Run terraform plan - response should be no change
-
-
 Netskope SWG broke aws configure command - either disable swg or need to add netskope CA cert to AWS trusted store
+
+================================== Terraform ==============================================
+
+# Terraform required version => While doing terraform init, makes sure this HCL will only run if the terraform CLI matches this restriction.
+## if not met will throw error, waits you to upgrade or downgrade tr CLI. To be done outside of HCL. but wont do by its own.
+
+# Required provider version => ensure provider version is installed within the constraint, while tr init is run while first run, but then locks it.
+## there after provider version is not ugpraded even if there is version within the constraints. for a provider upgrade
+## to happen, you have user tr init -upgrade.
+
+
+
+
+
 
 
 
